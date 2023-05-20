@@ -1,15 +1,11 @@
 import fastity from 'fastify'
-import { PrismaClient } from '@prisma/client'
+import { memoriesRoutes } from './routes/memories'
 
 const PORT = 3333
 
 const app = fastity()
-const prisma = new PrismaClient()
 
-app.get('/hello', async () => {
-  const users = await prisma.user.findMany()
-  return users
-})
+app.register(memoriesRoutes)
 
 app
   .listen({
